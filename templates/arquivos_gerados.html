@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório de Arquivos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        main {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        ul {
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon {
+            margin-right: 10px;
+            width: 30px;
+            height: 30px;
+        }
+
+        .status {
+            text-align: center;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        #totalizador {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 1em;
+            color: #888;
+        }
+
+        .btn-back-dir {
+            display: block;
+            margin: 15px auto;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 3px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            width: 100px;
+        }
+
+        .btn-back-dir:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Relatório de Arquivos</h1>
+    <main>
+        <ul id="lista-arquivos">
+            <!-- Aqui serão exibidos os nomes dos arquivos -->
+        </ul>
+        <p class="status">Carregando...</p>
+        <p id="totalizador"></p>
+        <a href="/" class="btn-back-dir">Concluir</a>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            function carregarArquivos() {
+                $('.status').html('<span class="loading">Carregando arquivos...</span>');
+                $.ajax({
+                    url: '/arquivos_gerados',
+                    type: 'GET',
+                    success: function(response) {
+                        $('#lista-arquivos').empty();
+                        var totalRegistros = response.arquivos.length;
+
+                        response.arquivos.forEach(function(arquivo) {
+                            $('#lista-arquivos').append('<li>' +
+                                '<img class="icon" src="https://img.freepik.com/vetores-premium/icone-de-documento-vetorial-isolado_723554-175.jpg?w=2000" alt="CLID">' +
+                                '<span>' + arquivo + '</span>' +
+                                '</li>');
+                        });
+
+                        $('.status').html('Arquivos carregados');
+                        $('#totalizador').text('Total de registros: ' + totalRegistros);
+                    },
+                    error: function(error) {
+                        $('.status').html('<span class="error">Erro ao carregar os arquivos</span>');
+                        console.log('Erro ao carregar os arquivos:', error);
+                    }
+                });
+            }
+
+            carregarArquivos();
+
+            setInterval(carregarArquivos, 5000);
+        });
+    </script>
+</body>
+</html>

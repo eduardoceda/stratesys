@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Stratesys- Contracts CLID</title>
+    <style>
+        body {
+            font-family: 'HelveticaNeue-CondensedBold', 'Arial Narrow', Arial, sans-serif;
+            color: #4a4a4a;
+            background-color: #f7f7f7; /* Mantenha a cor de fundo inicial para navegadores sem suporte ao gradiente */
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom, #ffffff, #333333); /* Gradiente de fundo em cinza e branco */
+        }
+
+        /* Estilos para a barra de progresso */
+        .container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 70px;
+        }
+
+        .form-box {
+            width: 320px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        #progress {
+            width: 100%;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            height: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        #progress-bar {
+            width: 0%;
+            height: 100%;
+            border-radius: 4px;
+            background-color: #007bff;
+        }
+
+        nav {
+            background-color: rgba(52, 58, 64, 0.9);
+            width: 100%;
+            height: 50px; /* Defina a altura desejada aqui */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav img {
+            width: 100px;
+            height: auto;
+            margin-left: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ccc;
+        }
+
+        form {
+            width: 320px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 70px; 
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        label {
+            font-size: 16px;
+            color: #555;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            color: #555;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .custom-file-upload {
+            border: 1px solid #ccc;
+            display: block;
+            padding: 6px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+            background-color: #f7f7f7;
+            color: #555;
+            transition: background-color 0.3s, color 0.3s;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .custom-file-upload:hover {
+            background-color: #e0e0e0;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .file-name {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .logo-img {
+            width: 100px;
+            height: auto;
+            display: block;
+            margin: 0 auto 20px;
+        }
+
+        .form-box {
+            width: 380px;
+            padding: 50px;
+            background-color: rgba(255, 255, 255, 0.9); /* Cor de fundo com opacidade */
+            backdrop-filter: blur(10px); /* Desfoque para efeito de vidro */
+            border: 1px solid rgba(255, 255, 255, 0.5); /* Borda translúcida */
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+        }
+
+        #loadingGif {
+            width: 65px; /* Defina o tamanho desejado */
+            height: auto; /* Mantém a proporção original */
+            display: block; /* Torna a imagem um bloco para centralizar */
+            margin: 0 auto; /* Centraliza horizontalmente */
+        }
+
+        @media screen and (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 20px;
+            }
+
+            nav ul {
+                margin-top: 20px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav ul li {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            nav img {
+                margin-bottom: 20px;
+            }
+
+            nav {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <img src="https://www.stratesys-ts.com/wp-content/themes/str_theme/assets/img/logo-stratesys.png" alt="Logo Strateys">
+        <ul><!--
+            <li><a href="https://www.stratesys-ts.com/pt/quem-somos/">Sobre</a></li>
+            <li><a href="https://www.stratesys-ts.com/pt/#contact">Contato</a></li>
+            -->
+            <li><a href="/logout">Sair</a></li> <!-- Adicionando o botão "Sair" com um link para a página de logout -->
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <form action="/process" method="post" enctype="multipart/form-data" class="form-box">  
+        <img src="https://gifs.eco.br/wp-content/uploads/2022/08/gifs-de-contrato-7.gif" alt="Logo Contratos" class="logo-img">
+        <h2>Desmembramento de arquivos CLIDs:</h2>
+        <label for="option">Selecionar tipo de contrato:</label>
+        <select id="option" name="option" required>
+            <option value=""></option>
+            <option value="national">Contrato Nacional</option>
+            <option value="international">Contrato Internacional</option>
+        </select>
+    
+        <label for="fileUpload1">
+            Escolha o arquivo:
+        </label>
+        <input type="file" id="fileUpload" name="fileUpload" accept=".xlsx, .xls" required style="display: none;">
+                
+        <label for="fileUpload2" class="custom-file-upload">
+            Clique para selecionar o arquivo
+        </label>
+        <div id="fileName" class="file-name"></div>
+
+        <br> <!-- Adicionando uma linha de quebra -->
+
+        <input type="submit" value="Processar" onclick="exibirImagem()">
+
+        <div id="imagem" style="display: none; text-align: center; margin-top: 100px;">
+            <p>Processando arquivo... Por favor, aguarde.</p>
+            <img src="https://usagif.com/wp-content/uploads/loading-56.gif" alt="Indicador de Carregamento" style="width: 65px; height: auto;">
+        </div>
+        
+        {% if error %}
+            <div style="color: red; text-align: center; margin-top: 10px;">
+                {{ error }}
+            </div>
+        {% endif %}
+    </form>
+ 
+<script>
+
+    function exibirImagem() {
+        document.getElementById("imagem").style.display = "block";
+    }
+
+    document.getElementById('fileUpload').addEventListener('change', function () {
+        const fileName = this.value.split('\\').pop();
+        document.getElementById('fileName').innerHTML = 'Arquivo selecionado: ' + fileName;
+    });
+
+    document.querySelector('.custom-file-upload').addEventListener('click', function () {
+        document.getElementById('fileUpload').click();
+    });
+
+
+    // Adicione um identificador ao botão "Processar"
+    document.getElementById('submitButton').addEventListener('click', function (event) {
+        event.preventDefault(); // Evitar o envio do formulário automaticamente
+
+        // Exibir o indicador de carregamento ao clicar no botão
+        document.getElementById('loadingIndicator').style.display = 'block';
+
+        // Mostrar o indicador de processamento
+        document.getElementById('processingIndicator').style.display = 'block';
+
+        const fileInput = document.getElementById('fileUpload');
+        const file = fileInput.files[0];
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const xhr = new XMLHttpRequest();
+
+        xhr.upload.onloadstart = function () {
+            document.getElementById('progress').style.display = 'block';
+        };
+
+        xhr.upload.onprogress = function (event) {
+            if (event.lengthComputable) {
+                const percent = (event.loaded / event.total) * 100;
+                document.getElementById('progress-bar').style.width = percent + '%';
+            }
+        };
+
+        xhr.onload = function () {
+            // Lógica para tratar a resposta do servidor após o upload completo
+            window.location.href = '/pagina_arquivos_gerados';
+        };
+
+        // Substitua '/process' pela URL correta para processamento no servidor
+        xhr.open('POST', '/process');
+        xhr.send(formData);
+    });
+</script>
+</body>
+</html>

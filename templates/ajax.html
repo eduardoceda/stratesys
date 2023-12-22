@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Arquivos Gerados</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Arquivos Gerados</h1>
+    <ul id="lista-arquivos">
+        <!-- Aqui serão exibidos os nomes dos arquivos -->
+    </ul>
+
+    <script>
+        $(document).ready(function(){
+            // Função para carregar os arquivos gerados
+            function carregarArquivos() {
+                $.ajax({
+                    url: '/arquivos_gerados',
+                    type: 'GET',
+                    success: function(response) {
+                        // Limpa a lista de arquivos
+                        $('#lista-arquivos').empty();
+
+                        // Adiciona cada arquivo à lista
+                        response.arquivos.forEach(function(arquivo) {
+                            $('#lista-arquivos').append('<li>' + arquivo + '</li>');
+                        });
+                    },
+                    error: function(error) {
+                        console.log('Erro ao carregar os arquivos:', error);
+                    }
+                });
+            }
+
+            // Chama a função para carregar os arquivos ao carregar a página
+            carregarArquivos();
+
+            // Atualiza os arquivos a cada 5 segundos (opcional - para atualização em tempo real)
+            setInterval(carregarArquivos, 5000); // Tempo em milissegundos (aqui, 5000 ms = 5 segundos)
+        });
+    </script>
+</body>
+</html>
